@@ -21,10 +21,10 @@ class Solution:
         if j == 9:  # Go to next row
             return self.solve(i + 1, 0, board)
         
-        if board[i][j] != '.':
+        if board[i][j] != 0: 
             return self.solve(i, j + 1, board)
 
-        for c in '123456789':
+        for c in range(1, 10): 
             if not self.isValid(i, j, board, c):
                 continue
 
@@ -32,9 +32,15 @@ class Solution:
             if self.solve(i, j + 1, board):
                 return True
 
-            board[i][j] = '.'
+            board[i][j] = 0  # Reset cell to 0
 
         return False
 
     def solveSudoku(self, board):
         self.solve(0, 0, board)
+
+    def printBoard(self, board):
+        for i in range(9):
+            for j in range(9):
+                print(board[i][j], end=" ")
+            print()
